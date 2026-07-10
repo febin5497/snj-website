@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANJO PROJECTS AND INFRASTRUCTURES PRIVATE LIMITED</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green: #213837;
+            --green-light: #2a4a48;
+            --green-mid: #0eaaa6;
+            --gold: #0eaaa6;
+            --gold-light: #12c4bf;
+            --gold-dark: #0c918d;
+            --cream: #f7fafa;
+            --cream2: #eef5f5;
+            --cream3: #e0eeed;
+            --white: #FFFFFF;
+            --text: #1a1a1a;
+            --text2: #555555;
+            --text3: #888888;
+            --border: rgba(14,170,166,0.08);
+            --border2: rgba(14,170,166,0.12);
+            --shadow: 0 1px 3px rgba(14,170,166,0.06);
+            --shadow-md: 0 4px 16px rgba(14,170,166,0.08);
+            --shadow-lg: 0 12px 40px rgba(14,170,166,0.12);
+            --shadow-xl: 0 20px 60px rgba(14,170,166,0.15);
+            --radius: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --blur: blur(24px) saturate(160%);
+        }
+
+        [data-theme="dark"] {
+            --cream: #0f1e1d;
+            --cream2: #162e2d;
+            --cream3: #1e3e3d;
+            --white: #244947;
+            --text: #e8e4dc;
+            --text2: #b0a898;
+            --text3: #7a7268;
+            --border: rgba(14,170,166,0.12);
+            --border2: rgba(14,170,166,0.18);
+            --shadow: 0 1px 3px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.25);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.3);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--gold) var(--cream2); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream2); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== PRELOADER ========== */
+        .preloader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: var(--cream);
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .preloader-logo { width: 120px; height: 120px; object-fit: contain; border-radius: 24px; animation: preloader-pulse 1.5s ease-in-out infinite; background: var(--cream); padding: 6px; }
+        .preloader-tag { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-top: 20px; }
+        .preloader-bar { width: 180px; height: 2px; background: var(--border2); margin-top: 24px; border-radius: 2px; overflow: hidden; }
+        .preloader-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px; animation: preloader-load 2s ease-in-out forwards; }
+        @keyframes preloader-load { 0% { width: 0; } 100% { width: 100%; } }
+        @keyframes preloader-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.03); opacity: 0.8; } }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed; top: 36px; left: 0; right: 0; z-index: 1000;
+            padding: 16px 48px;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .navbar.scrolled {
+            background: rgba(250,247,242,0.82);
+            -webkit-backdrop-filter: var(--blur);
+            backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 48px;
+            box-shadow: var(--shadow);
+        }
+        [data-theme="dark"] .navbar.scrolled { background: rgba(15,26,22,0.85); }
+        .nav-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-decoration: none; }
+        .nav-logo { width: 80px; height: 80px; object-fit: contain; border-radius: 16px; transition: transform 0.3s; background: var(--cream); padding: 4px; border: 2px solid var(--border2); }
+        [data-theme="dark"] .nav-logo { background: var(--cream2); }
+        .nav-logo:hover { transform: scale(1.05); }
+        .nav-brand-text { font-size: 17px; font-weight: 800; color: var(--text); letter-spacing: 2px; text-transform: uppercase; line-height: 1.1; }
+        .nav-brand-text span { color: var(--gold); display: block; font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-top: 1px; }
+        .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+        .nav-links a { color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.3px; transition: color 0.25s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-cta {
+            padding: 10px 24px; background: var(--green); color: var(--cream) !important;
+            font-weight: 600 !important; border-radius: 10px; font-size: 12px !important;
+            letter-spacing: 0.5px !important; transition: all 0.3s !important;
+        }
+        .nav-cta:hover { background: var(--gold) !important; color: var(--white) !important; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .top-bar {
+            background: var(--green); padding: 8px 48px; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .top-bar-left { display: flex; align-items: center; gap: 24px; }
+        .top-bar-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 500; }
+        .top-bar-item i { color: var(--gold); font-size: 0.8rem; }
+        .top-bar-right { display: flex; align-items: center; gap: 16px; }
+        .top-bar-right a { color: rgba(255,255,255,0.6); font-size: 0.85rem; transition: color 0.25s; }
+        .top-bar-right a:hover { color: var(--gold); }
+        .top-bar-phone { color: var(--gold) !important; font-weight: 700 !important; font-size: 13px !important; letter-spacing: 0.5px; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; padding: 4px; }
+        .hamburger span { width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s; border-radius: 2px; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(250,247,242,0.97); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 28px; opacity: 0; visibility: hidden; transition: all 0.35s; }
+        .mobile-menu.active { opacity: 1; visibility: visible; }
+        .mobile-menu a { color: var(--text); text-decoration: none; font-size: 22px; font-weight: 600; transition: color 0.25s; }
+        .mobile-menu a:hover { color: var(--gold); }
+
+        /* ========== THEME TOGGLE ========== */
+        .theme-toggle {
+            position: fixed; bottom: 96px; right: 24px; z-index: 998;
+            width: 44px; height: 44px; border-radius: 12px;
+            background: var(--white); border: 1px solid var(--border2);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; color: var(--gold);
+            box-shadow: var(--shadow-md); transition: all 0.3s;
+        }
+        .theme-toggle:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+        /* ========== HERO ========== */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding-top: 36px; }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: linear-gradient(160deg, var(--cream) 0%, var(--cream2) 40%, var(--cream3) 100%);
+        }
+        .hero-pattern {
+            position: absolute; inset: 0; opacity: 0.3;
+            background-image: radial-gradient(circle at 2px 2px, var(--gold) 0.5px, transparent 0.5px);
+            background-size: 48px 48px;
+        }
+        .hero-accent {
+            position: absolute; top: -20%; right: -10%; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(191,147,100,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-accent2 {
+            position: absolute; bottom: -10%; left: -5%; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(20,45,39,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 48px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .hero-text { max-width: 600px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 18px; background: var(--white); border: 1px solid var(--border2);
+            border-radius: 8px; font-size: 11px; font-weight: 600; color: var(--gold);
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px;
+            box-shadow: var(--shadow);
+        }
+        .hero-badge .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: dot-pulse 2s ease-in-out infinite; }
+        @keyframes dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .hero-title {
+            font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 800;
+            line-height: 1.08; margin-bottom: 24px; color: var(--green);
+            letter-spacing: -1.5px;
+        }
+        .hero-title .gold { color: var(--gold); }
+        .hero-sub { font-size: 15px; color: var(--text2); max-width: 460px; margin-bottom: 40px; line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 14px; align-items: center; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 36px; background: var(--green); color: var(--cream);
+            font-family: inherit; font-size: 13px; font-weight: 600;
+            text-decoration: none; border-radius: 12px; border: none; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1); letter-spacing: 0.3px;
+        }
+        .btn-primary:hover { background: var(--gold); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 36px; background: transparent; color: var(--text);
+            font-family: inherit; font-size: 13px; font-weight: 600;
+            text-decoration: none; border-radius: 12px;
+            border: 1px solid var(--border2); cursor: pointer; transition: all 0.3s;
+        }
+        .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+        .hero-visual { position: relative; display: flex; justify-content: center; }
+        .hero-img-wrap {
+            width: 100%; max-width: 520px; height: 480px; border-radius: var(--radius-xl);
+            overflow: hidden; position: relative; box-shadow: var(--shadow-xl);
+        }
+        .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-float-card {
+            position: absolute; bottom: -24px; left: -32px;
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 24px 28px;
+            box-shadow: var(--shadow-lg); z-index: 3;
+        }
+        .hero-float-num { font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1; }
+        .hero-float-text { font-size: 12px; color: var(--text2); margin-top: 4px; font-weight: 500; }
+        .hero-float-card2 {
+            position: absolute; top: -16px; right: -24px;
+            background: var(--green); border-radius: var(--radius); padding: 20px 24px;
+            box-shadow: var(--shadow-lg); z-index: 3;
+        }
+        .hero-float-card2 .num { font-size: 1.5rem; font-weight: 800; color: var(--gold); }
+        .hero-float-card2 .label { font-size: 10px; color: rgba(250,247,242,0.7); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .hero-scroll {
+            position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+            z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: var(--text3); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+            font-weight: 600; animation: scroll-hint 2s ease-in-out infinite;
+        }
+        .hero-scroll .line-v { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--gold), transparent); }
+        @keyframes scroll-hint { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+        /* ========== TRUST BAR ========== */
+        .trust-bar {
+            padding: 40px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            background: var(--white);
+        }
+        .trust-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        .trust-item { display: flex; align-items: center; gap: 16px; }
+        .trust-icon {
+            width: 48px; height: 48px; min-width: 48px; border-radius: 12px;
+            background: rgba(191,147,100,0.08); display: flex; align-items: center; justify-content: center;
+            color: var(--gold); font-size: 1.1rem;
+        }
+        .trust-text h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+        .trust-text p { font-size: 11px; color: var(--text3); font-weight: 500; }
+
+        /* ========== SECTIONS ========== */
+        .section { padding: 100px 48px; max-width: 1400px; margin: 0 auto; }
+        .section-label {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 10px; font-weight: 700; color: var(--gold);
+            text-transform: uppercase; letter-spacing: 4px; margin-bottom: 16px;
+        }
+        .section-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+        .section-title { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; line-height: 1.12; margin-bottom: 16px; letter-spacing: -0.8px; }
+        .section-title .gold { color: var(--gold); }
+        .section-desc { color: var(--text2); font-size: 14px; max-width: 520px; line-height: 1.8; }
+
+        /* ========== ABOUT ========== */
+        .about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-visual { position: relative; }
+        .about-img { width: 100%; height: 480px; object-fit: cover; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); }
+        .about-experience {
+            position: absolute; top: -16px; left: -16px;
+            background: var(--gold); border-radius: var(--radius); padding: 20px 24px;
+            box-shadow: var(--shadow-lg);
+        }
+        .about-experience .num { font-size: 1.8rem; font-weight: 800; color: var(--green); line-height: 1; }
+        .about-experience .label { font-size: 10px; color: var(--green); font-weight: 600; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
+        .about-float {
+            position: absolute; bottom: -20px; right: -20px;
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-lg);
+        }
+        .about-float .num { font-size: 2rem; font-weight: 800; color: var(--gold); }
+        .about-float .label { font-size: 12px; color: var(--text2); font-weight: 500; }
+        .about-content .section-desc { margin-bottom: 32px; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+        .about-feature {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 18px; background: var(--white); border: 1px solid var(--border);
+            border-radius: 10px; transition: all 0.3s;
+        }
+        .about-feature:hover { border-color: var(--gold); transform: translateX(4px); }
+        .about-feature i { color: var(--gold); font-size: 0.9rem; }
+        .about-feature span { font-size: 12px; font-weight: 600; color: var(--text); }
+
+        /* ========== SERVICES ========== */
+        .services-section {
+            background: var(--green); border-radius: var(--radius-xl);
+            margin: 0 48px; padding: 80px 64px; position: relative; overflow: hidden;
+        }
+        .services-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .services-header { text-align: center; margin-bottom: 56px; }
+        .services-header .section-title { color: var(--cream); }
+        .services-header .section-desc { color: rgba(250,247,242,0.6); margin: 0 auto; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .service-card {
+            background: rgba(250,247,242,0.04); border: 1px solid rgba(250,247,242,0.08);
+            border-radius: var(--radius-lg); padding: 36px 28px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .service-card:hover {
+            background: rgba(250,247,242,0.08); border-color: rgba(191,147,100,0.3);
+            transform: translateY(-6px);
+        }
+        .service-icon {
+            width: 52px; height: 52px; background: rgba(191,147,100,0.12);
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: var(--gold); margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+        .service-card:hover .service-icon { background: var(--gold); color: var(--green); }
+        .service-card h3 { font-size: 15px; font-weight: 700; color: var(--cream); margin-bottom: 10px; }
+        .service-card p { color: rgba(250,247,242,0.5); font-size: 13px; line-height: 1.7; }
+        .service-card .learn-more {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--gold); font-size: 12px; font-weight: 600; margin-top: 20px;
+            text-decoration: none; transition: gap 0.3s;
+        }
+        .service-card:hover .learn-more { gap: 10px; }
+
+        /* ========== STATS ========== */
+        .stats-section { padding: 80px 48px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .stat-card {
+            text-align: center; padding: 36px 20px;
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); transition: all 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--gold); }
+        .stat-card i { font-size: 1.4rem; color: var(--gold); margin-bottom: 16px; }
+        .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--green); line-height: 1; }
+        .stat-num span { color: var(--gold); }
+        .stat-label { color: var(--text3); font-size: 11px; margin-top: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+        /* ========== PROJECTS FILTER ========== */
+        .projects-section { padding: 100px 48px; max-width: 1400px; margin: 0 auto; }
+        .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+        .filter-bar { display: flex; background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+        .filter-btn {
+            padding: 10px 20px; background: transparent; border: none;
+            border-radius: 8px; color: var(--text3); font-family: inherit;
+            font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.25s;
+        }
+        .filter-btn:hover { color: var(--text); }
+        .filter-btn.active { background: var(--green); color: var(--cream); box-shadow: var(--shadow); }
+        .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .project-card {
+            position: relative; border-radius: var(--radius-lg); overflow: hidden;
+            height: 380px; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .project-card.hidden-card { display: none; }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
+        .project-card:hover img { transform: scale(1.05); }
+        .project-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(20,45,39,0.92) 0%, rgba(20,45,39,0.1) 50%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 32px;
+        }
+        .project-tag {
+            display: inline-block; padding: 5px 14px;
+            background: var(--gold); color: var(--green);
+            font-size: 10px; font-weight: 700; border-radius: 6px;
+            text-transform: uppercase; letter-spacing: 1px; width: fit-content; margin-bottom: 12px;
+        }
+        .project-overlay h3 { font-size: 18px; font-weight: 700; color: var(--cream); margin-bottom: 6px; }
+        .project-overlay p { color: rgba(250,247,242,0.6); font-size: 12px; opacity: 0; transform: translateY(12px); transition: all 0.35s; }
+        .project-card:hover .project-overlay p { opacity: 1; transform: translateY(0); }
+
+        /* ========== TEAM ========== */
+        .team-section { background: var(--white); border-radius: var(--radius-xl); margin: 0 48px; padding: 80px 64px; border: 1px solid var(--border); }
+        .team-header { text-align: center; margin-bottom: 56px; }
+        .team-header .section-desc { margin: 0 auto; }
+        .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .team-card {
+            text-align: center; background: var(--cream); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 32px 20px; transition: all 0.3s;
+        }
+        .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--gold); }
+        .team-avatar {
+            width: 100px; height: 100px; border-radius: 50%; overflow: hidden;
+            margin: 0 auto 20px; border: 3px solid var(--gold); padding: 3px; background: var(--cream2);
+        }
+        .team-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .team-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+        .team-card .role { color: var(--gold); font-size: 11px; font-weight: 600; margin-bottom: 12px; }
+        .team-card p { color: var(--text3); font-size: 12px; line-height: 1.6; }
+        .team-socials { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+        .team-socials a {
+            width: 32px; height: 32px; background: var(--cream2); border: 1px solid var(--border);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            color: var(--text3); text-decoration: none; font-size: 0.75rem; transition: all 0.25s;
+        }
+        .team-socials a:hover { background: var(--gold); color: var(--white); border-color: var(--gold); }
+
+        /* ========== WHY US ========== */
+        .why-section {
+            background: var(--cream2); border-radius: var(--radius-xl);
+            margin: 0 48px; padding: 80px 64px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+        }
+        .why-list { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+        .why-item {
+            display: flex; gap: 16px; padding: 22px;
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--radius); transition: all 0.3s;
+        }
+        .why-item:hover { border-color: var(--gold); transform: translateX(4px); }
+        .why-item-icon {
+            width: 44px; height: 44px; min-width: 44px; background: rgba(191,147,100,0.08);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            color: var(--gold); font-size: 1.1rem;
+        }
+        .why-item h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+        .why-item p { color: var(--text3); font-size: 12px; line-height: 1.6; }
+        .why-image { position: relative; }
+        .why-image img { width: 100%; height: 520px; object-fit: cover; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); }
+        .why-badge {
+            position: absolute; bottom: 24px; left: -16px;
+            background: var(--gold); border-radius: var(--radius); padding: 20px 28px;
+            display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-lg);
+        }
+        .why-badge i { font-size: 1.5rem; color: var(--green); }
+        .why-badge-text { font-size: 13px; font-weight: 700; color: var(--green); line-height: 1.3; }
+
+        /* ========== CLIENTS ========== */
+        .clients-section { padding: 72px 48px; overflow: hidden; }
+        .clients-header { text-align: center; margin-bottom: 40px; }
+        .clients-header .section-desc { margin: 0 auto; }
+        .clients-track-wrapper { position: relative; overflow: hidden; mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent); }
+        .clients-track { display: flex; gap: 56px; animation: scroll-clients 30s linear infinite; width: max-content; }
+        .clients-track:hover { animation-play-state: paused; }
+        @keyframes scroll-clients { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .client-logo { width: 140px; height: 60px; object-fit: contain; filter: grayscale(100%) opacity(0.35); transition: all 0.4s; flex-shrink: 0; }
+        .client-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.08); }
+
+        /* ========== TESTIMONIALS ========== */
+        .testimonials-section { padding: 100px 48px; max-width: 1400px; margin: 0 auto; text-align: center; }
+        .testimonials-section .section-desc { margin: 0 auto 48px; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .testimonial-card {
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 32px; text-align: left;
+            transition: all 0.3s; position: relative;
+        }
+        .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--gold); }
+        .testimonial-card::before {
+            content: '"'; font-size: 4rem; color: var(--gold); opacity: 0.15;
+            position: absolute; top: 16px; right: 24px; line-height: 1; font-weight: 800;
+        }
+        .testimonial-stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 16px; letter-spacing: 3px; }
+        .testimonial-card p { color: var(--text2); font-size: 13px; line-height: 1.8; margin-bottom: 24px; }
+        .testimonial-author { display: flex; align-items: center; gap: 14px; }
+        .testimonial-avatar {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: var(--green); display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: var(--cream); font-size: 0.85rem;
+        }
+        .testimonial-name { font-weight: 700; font-size: 13px; }
+        .testimonial-role { color: var(--text3); font-size: 11px; }
+
+        /* ========== CTA ========== */
+        .cta-section {
+            margin: 0 48px 80px; background: var(--green); border-radius: var(--radius-xl);
+            padding: 64px; display: flex; align-items: center; justify-content: space-between;
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: -50%; right: -10%;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(191,147,100,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .cta-content { position: relative; z-index: 2; }
+        .cta-content h2 { font-size: 2.2rem; font-weight: 800; color: var(--cream); line-height: 1.15; margin-bottom: 12px; }
+        .cta-content p { color: rgba(250,247,242,0.6); font-size: 14px; max-width: 440px; }
+        .cta-btn {
+            position: relative; z-index: 2; padding: 18px 44px;
+            background: var(--gold); color: var(--green);
+            font-family: inherit; font-size: 13px; font-weight: 700;
+            border: none; border-radius: 12px; cursor: pointer; text-decoration: none;
+            transition: all 0.3s; letter-spacing: 0.3px;
+        }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(191,147,100,0.35); }
+
+        /* ========== CONTACT ========== */
+        .contact-section {
+            background: var(--white); border-radius: var(--radius-xl);
+            margin: 0 48px 80px; padding: 80px 64px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+            border: 1px solid var(--border);
+        }
+        .contact-details { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+        .contact-item {
+            display: flex; align-items: center; gap: 16px;
+            padding: 18px 22px; background: var(--cream); border: 1px solid var(--border);
+            border-radius: 12px; transition: all 0.3s;
+        }
+        .contact-item:hover { border-color: var(--gold); transform: translateX(4px); }
+        .contact-item-icon {
+            width: 42px; height: 42px; min-width: 42px; background: rgba(191,147,100,0.08);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            color: var(--gold); font-size: 1rem;
+        }
+        .contact-item-text span { display: block; font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 2px; }
+        .contact-item-text p { font-size: 13px; font-weight: 600; }
+        .contact-form { display: flex; flex-direction: column; gap: 16px; }
+        .form-group { display: flex; gap: 16px; }
+        .form-group input { flex: 1; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 14px 18px;
+            background: var(--cream); border: 1px solid var(--border);
+            border-radius: 10px; color: var(--text); font-family: inherit;
+            font-size: 13px; outline: none; transition: all 0.25s;
+        }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--text3); }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); background: var(--white); }
+        .contact-form textarea { min-height: 120px; resize: vertical; }
+        .contact-form button {
+            padding: 14px 36px; background: var(--green); color: var(--cream);
+            font-family: inherit; font-size: 13px; font-weight: 600;
+            border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            width: fit-content; letter-spacing: 0.3px;
+        }
+        .contact-form button:hover { background: var(--gold); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        /* ========== FOOTER ========== */
+        .footer { padding: 64px 48px 24px; border-top: 1px solid var(--border); background: var(--white); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; max-width: 1400px; margin: 0 auto; }
+        .footer-brand p { color: var(--text3); font-size: 13px; line-height: 1.7; margin-top: 16px; max-width: 300px; }
+        .footer-brand .brand-full { font-size: 14px; font-weight: 800; color: var(--text); letter-spacing: 1px; margin-top: 12px; }
+        .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+        .footer-social a {
+            width: 38px; height: 38px; background: var(--cream); border: 1px solid var(--border);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            color: var(--text3); text-decoration: none; transition: all 0.25s;
+        }
+        .footer-social a:hover { background: var(--gold); color: var(--white); border-color: var(--gold); }
+        .footer-col h4 { font-size: 11px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; color: var(--text); }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-col a { color: var(--text3); text-decoration: none; font-size: 13px; transition: all 0.25s; }
+        .footer-col a:hover { color: var(--gold); padding-left: 4px; }
+        .footer-bottom {
+            max-width: 1400px; margin: 48px auto 0; padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            color: var(--text3); font-size: 11px;
+        }
+
+        /* ========== GALLERY ========== */
+        .gallery-section { padding: 100px 48px; max-width: 1400px; margin: 0 auto; }
+        .gallery-header { text-align: center; margin-bottom: 48px; }
+        .gallery-header .section-desc { margin: 0 auto; }
+        .gallery-filters { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+        .gallery-filter {
+            padding: 10px 24px; background: var(--white); border: 1px solid var(--border);
+            border-radius: 8px; color: var(--text3); font-family: inherit;
+            font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.25s;
+        }
+        .gallery-filter:hover { border-color: var(--gold); color: var(--gold); }
+        .gallery-filter.active { background: var(--green); color: var(--cream); border-color: var(--green); }
+        .gallery-masonry {
+            columns: 4; column-gap: 16px;
+        }
+        .gallery-item {
+            break-inside: avoid; margin-bottom: 16px;
+            border-radius: var(--radius-lg); overflow: hidden;
+            position: relative; cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .gallery-item.hidden { display: none; }
+        .gallery-item img {
+            width: 100%; display: block;
+            transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+        }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(20,45,39,0.85) 0%, rgba(20,45,39,0.2) 40%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 24px; opacity: 0; transition: opacity 0.35s;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay .project-tag {
+            display: inline-block; padding: 4px 12px; background: var(--gold); color: var(--green);
+            font-size: 9px; font-weight: 700; border-radius: 5px; text-transform: uppercase;
+            letter-spacing: 1px; width: fit-content; margin-bottom: 8px;
+        }
+        .gallery-overlay h4 { font-size: 15px; font-weight: 700; color: var(--cream); margin-bottom: 4px; }
+        .gallery-overlay p { font-size: 11px; color: rgba(250,247,242,0.6); line-height: 1.5; }
+        .gallery-overlay .zoom-icon {
+            position: absolute; top: 16px; right: 16px;
+            width: 36px; height: 36px; background: rgba(250,247,242,0.2);
+            backdrop-filter: blur(8px); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--cream); font-size: 0.85rem;
+        }
+
+        /* Gallery Lightbox */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 10000;
+            background: rgba(0,0,0,0.92);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.35s;
+        }
+        .lightbox.active { opacity: 1; visibility: visible; }
+        .lightbox-content {
+            position: relative; max-width: 90vw; max-height: 85vh;
+            transform: scale(0.9); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+        .lightbox.active .lightbox-content { transform: scale(1); }
+        .lightbox-content img { max-width: 100%; max-height: 85vh; border-radius: 12px; object-fit: contain; }
+        .lightbox-close {
+            position: fixed; top: 24px; right: 24px;
+            width: 44px; height: 44px; background: rgba(255,255,255,0.1);
+            border: none; border-radius: 12px; color: white; font-size: 1.2rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.25s; z-index: 10001;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+        .lightbox-nav {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; background: rgba(255,255,255,0.1);
+            border: none; border-radius: 12px; color: white; font-size: 1.2rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.25s; z-index: 10001;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+        .lightbox-prev { left: 24px; }
+        .lightbox-next { right: 24px; }
+        .lightbox-caption {
+            position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+            text-align: center; color: rgba(255,255,255,0.8); z-index: 10001;
+        }
+        .lightbox-caption h4 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+        .lightbox-caption p { font-size: 12px; color: rgba(255,255,255,0.5); }
+        .lightbox-counter {
+            position: fixed; top: 24px; left: 24px;
+            color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 600; z-index: 10001;
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-masonry { columns: 3; }
+            .gallery-section { padding: 72px 28px; }
+        }
+        @media (max-width: 768px) {
+            .gallery-masonry { columns: 2; }
+            .gallery-section { padding: 48px 16px; }
+            .lightbox-nav { display: none; }
+        }
+
+        /* ========== CHATBOT ========== */
+        .chatbot-toggle {
+            position: fixed; bottom: 24px; right: 24px; z-index: 998;
+            width: 52px; height: 52px; border-radius: 14px;
+            background: var(--green); border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: var(--cream);
+            box-shadow: var(--shadow-lg); transition: all 0.3s;
+        }
+        .chatbot-toggle:hover { transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-xl); }
+        .chatbot-toggle .badge {
+            position: absolute; top: -4px; right: -4px;
+            width: 18px; height: 18px; background: var(--gold);
+            border-radius: 50%; font-size: 0.65rem; color: var(--green);
+            display: flex; align-items: center; justify-content: center; font-weight: 700;
+        }
+        .chatbot-window {
+            position: fixed; bottom: 88px; right: 24px; z-index: 997;
+            width: 360px; height: 480px;
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--radius-xl); overflow: hidden;
+            display: flex; flex-direction: column;
+            opacity: 0; visibility: hidden; transform: translateY(12px) scale(0.97);
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: var(--shadow-xl);
+        }
+        .chatbot-window.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .chatbot-header {
+            padding: 18px 20px; background: var(--green);
+            display: flex; align-items: center; gap: 12px;
+        }
+        .chatbot-header img { width: 36px; height: 36px; border-radius: 10px; object-fit: contain; background: var(--cream); padding: 3px; }
+        .chatbot-header-text h4 { font-size: 13px; font-weight: 700; color: var(--cream); }
+        .chatbot-header-text span { font-size: 10px; color: rgba(250,247,242,0.5); }
+        .chatbot-close {
+            margin-left: auto; background: none; border: none;
+            font-size: 1rem; color: rgba(250,247,242,0.6); cursor: pointer;
+            width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; transition: all 0.25s;
+        }
+        .chatbot-close:hover { background: rgba(250,247,242,0.1); color: var(--cream); }
+        .chatbot-messages { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .chat-msg { max-width: 82%; padding: 10px 16px; border-radius: 14px; font-size: 12px; line-height: 1.5; animation: msg-in 0.3s ease; }
+        @keyframes msg-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .chat-msg.bot { background: var(--cream); border: 1px solid var(--border); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: var(--green); color: var(--cream); align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+        .chatbot-quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px; border-top: 1px solid var(--border); }
+        .chatbot-quick button {
+            padding: 7px 14px; background: var(--cream); border: 1px solid var(--border);
+            border-radius: 8px; color: var(--gold); font-family: inherit;
+            font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.25s;
+        }
+        .chatbot-quick button:hover { background: var(--gold); color: var(--green); border-color: var(--gold); }
+        .chatbot-input { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+        .chatbot-input input {
+            flex: 1; padding: 10px 14px; background: var(--cream); border: 1px solid var(--border);
+            border-radius: 10px; color: var(--text); font-family: inherit;
+            font-size: 12px; outline: none;
+        }
+        .chatbot-input input:focus { border-color: var(--gold); }
+        .chatbot-input button {
+            width: 40px; height: 40px; background: var(--green); border: none;
+            border-radius: 10px; color: var(--cream); font-size: 0.9rem;
+            cursor: pointer; transition: all 0.25s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .chatbot-input button:hover { background: var(--gold); }
+
+        /* ========== ANIMATIONS ========== */
+        .reveal { opacity: 0; transform: translateY(32px); transition: all 0.7s cubic-bezier(0.4,0,0.2,1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+        .count-up { display: inline-block; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .navbar { padding: 14px 28px; top: 0; }
+            .navbar.scrolled { padding: 10px 28px; }
+            .top-bar { display: none; }
+            .hero { padding-top: 0; }
+            .section { padding: 72px 28px; }
+            .hero-content { grid-template-columns: 1fr; gap: 48px; padding: 0 28px; }
+            .hero-visual { order: -1; }
+            .hero-img-wrap { max-width: 100%; height: 360px; }
+            .hero-float-card { left: 16px; bottom: -16px; }
+            .hero-float-card2 { right: 16px; top: -12px; }
+            .about { grid-template-columns: 1fr; gap: 48px; }
+            .services-section, .team-section, .why-section, .contact-section { padding: 64px 36px; margin: 0 20px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-section { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .cta-section { margin: 0 20px 60px; padding: 48px 36px; flex-direction: column; text-align: center; gap: 24px; }
+            .contact-section { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .trust-grid { grid-template-columns: repeat(2, 1fr); }
+            .theme-toggle { bottom: 84px; right: 16px; width: 40px; height: 40px; }
+            .chatbot-toggle { bottom: 16px; right: 16px; width: 48px; height: 48px; }
+            .chatbot-window { right: 8px; bottom: 76px; width: calc(100vw - 16px); max-width: 360px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .mobile-menu { display: flex; }
+            .hero-title { font-size: clamp(2rem, 7vw, 2.8rem); }
+            .hero-buttons { flex-direction: column; align-items: flex-start; }
+            .services-grid, .stats-grid, .projects-grid, .team-grid { grid-template-columns: 1fr; }
+            .projects-header { flex-direction: column; align-items: flex-start; }
+            .filter-bar { overflow-x: auto; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .cta-content h2 { font-size: 1.6rem; }
+            .form-group { flex-direction: column; }
+            .trust-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <img src="logo.jpg" alt="SANJO" class="preloader-logo">
+        <div class="preloader-tag">Projects & Infrastructures</div>
+        <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+    </div>
+
+    <!-- THEME TOGGLE -->
+    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- TOP BAR -->
+    <div class="top-bar" id="topBar">
+        <div class="top-bar-left">
+            <div class="top-bar-item"><i class="fas fa-map-marker-alt"></i> Head Office, India</div>
+            <div class="top-bar-item"><i class="fas fa-clock"></i> Mon - Sat: 9:00 AM - 6:00 PM</div>
+        </div>
+        <div class="top-bar-right">
+            <a href="mailto:info@sanjoprojects.com"><i class="fas fa-envelope"></i> info@sanjoprojects.com</a>
+            <a href="tel:+91XXXXXXXXXX" class="top-bar-phone"><i class="fas fa-phone-alt"></i> +91 XXXXX XXXXX</a>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-brand">
+            <img src="logo.jpg" alt="SANJO Logo" class="nav-logo">
+            <div class="nav-brand-text">SANJO<span>Projects & Infrastructures</span></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#why">Why Us</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" style="font-size:28px;font-weight:800;color:var(--gold);margin-bottom:16px">SANJO</a>
+        <a href="#about" onclick="closeMobile()">About</a>
+        <a href="#services" onclick="closeMobile()">Services</a>
+        <a href="#projects" onclick="closeMobile()">Projects</a>
+        <a href="#gallery" onclick="closeMobile()">Gallery</a>
+        <a href="#team" onclick="closeMobile()">Team</a>
+        <a href="#why" onclick="closeMobile()">Why Us</a>
+        <a href="#testimonials" onclick="closeMobile()">Testimonials</a>
+        <a href="#contact" onclick="closeMobile()">Contact</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern"></div>
+        <div class="hero-accent"></div>
+        <div class="hero-accent2"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge"><span class="dot"></span>Trusted Since 2005</div>
+                <h1 class="hero-title">Building <span class="gold">Dreams</span> Into Reality</h1>
+                <p class="hero-sub">World-class construction, engineering, and infrastructure solutions with uncompromising quality and innovation across India.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Start Your Project <i class="fas fa-arrow-right" style="font-size:0.8rem"></i></a>
+                    <a href="#projects" class="btn-outline"><i class="fas fa-play" style="font-size:0.7rem"></i> View Our Work</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80" alt="Construction">
+                </div>
+                <div class="hero-float-card">
+                    <div class="hero-float-num">250+</div>
+                    <div class="hero-float-text">Projects Completed</div>
+                </div>
+                <div class="hero-float-card2">
+                    <div class="num">18+</div>
+                    <div class="label">Years Experience</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll"><span>Scroll</span><div class="line-v"></div></div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar">
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fas fa-truck"></i></div>
+                <div class="trust-text"><h4>Pan-India Delivery</h4><p>Serving 12+ states nationwide</p></div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="trust-text"><h4>2-Year Warranty</h4><p>Complete construction guarantee</p></div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fas fa-undo"></i></div>
+                <div class="trust-text"><h4>Quality Assurance</h4><p>ISO certified processes</p></div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fas fa-headset"></i></div>
+                <div class="trust-text"><h4>24/7 Support</h4><p>Dedicated project helpline</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="about">
+            <div class="about-visual reveal">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Construction" class="about-img">
+                <div class="about-experience"><div class="num">18+</div><div class="label">Years of Excellence</div></div>
+                <div class="about-float"><div class="num">250+</div><div class="label">Projects Completed</div></div>
+            </div>
+            <div class="about-content">
+                <div class="section-label reveal">About Us</div>
+                <h2 class="section-title reveal">We Build The Future With <span class="gold">Precision</span></h2>
+                <p class="section-desc reveal">SANJO Projects and Infrastructures Private Limited is a leading construction company committed to delivering excellence in building and infrastructure development.</p>
+                <p class="section-desc reveal" style="margin-top:12px">From residential complexes to large-scale commercial and industrial projects, we bring expertise, innovation, and dedication to every build.</p>
+                <div class="about-features">
+                    <div class="about-feature reveal"><i class="fas fa-check-circle"></i><span>Quality Materials</span></div>
+                    <div class="about-feature reveal"><i class="fas fa-check-circle"></i><span>Expert Team</span></div>
+                    <div class="about-feature reveal"><i class="fas fa-check-circle"></i><span>On-Time Delivery</span></div>
+                    <div class="about-feature reveal"><i class="fas fa-check-circle"></i><span>Modern Technology</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <div class="services-section" id="services">
+        <div class="services-header">
+            <div class="section-label reveal" style="justify-content:center;color:var(--gold)">What We Do</div>
+            <h2 class="section-title reveal">Comprehensive Construction <span class="gold">Services</span></h2>
+            <p class="section-desc reveal">End-to-end solutions tailored to your unique requirements.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal reveal-delay-1">
+                <div class="service-icon"><i class="fas fa-building"></i></div>
+                <h3>Commercial Construction</h3>
+                <p>State-of-the-art commercial buildings designed for functionality and long-term value.</p>
+                <a href="#contact" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <div class="service-icon"><i class="fas fa-home"></i></div>
+                <h3>Residential Projects</h3>
+                <p>Beautiful homes and residential complexes crafted with attention to every detail.</p>
+                <a href="#contact" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal reveal-delay-3">
+                <div class="service-icon"><i class="fas fa-road"></i></div>
+                <h3>Infrastructure Development</h3>
+                <p>Large-scale infrastructure projects including roads, bridges, and public facilities.</p>
+                <a href="#contact" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal reveal-delay-1">
+                <div class="service-icon"><i class="fas fa-drafting-compass"></i></div>
+                <h3>Interior Design</h3>
+                <p>Transforming spaces with innovative interior design solutions.</p>
+                <a href="#contact" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
+                <h3>Project Management</h3>
+                <p>Expert management ensuring seamless execution from planning to completion.</p>
+                <a href="#contact" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal reveal-delay-3">
+                <div class="service-icon"><i class="fas fa-industry"></i></div>
+                <h3>Industrial Construction</h3>
+                <p>Robust industrial facilities designed for operational efficiency and safety.</p>
+                <a href="#contact" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card reveal reveal-delay-1"><i class="fas fa-building"></i><div class="stat-num"><span class="count-up" data-target="250">0</span><span>+</span></div><div class="stat-label">Projects</div></div>
+            <div class="stat-card reveal reveal-delay-2"><i class="fas fa-users"></i><div class="stat-num"><span class="count-up" data-target="150">0</span><span>+</span></div><div class="stat-label">Team Members</div></div>
+            <div class="stat-card reveal reveal-delay-3"><i class="fas fa-award"></i><div class="stat-num"><span class="count-up" data-target="45">0</span><span>+</span></div><div class="stat-label">Awards Won</div></div>
+            <div class="stat-card reveal reveal-delay-4"><i class="fas fa-globe-asia"></i><div class="stat-num"><span class="count-up" data-target="12">0</span><span>+</span></div><div class="stat-label">States Covered</div></div>
+        </div>
+    </section>
+
+    <!-- PROJECTS WITH FILTER -->
+    <section class="projects-section" id="projects">
+        <div class="projects-header">
+            <div>
+                <div class="section-label reveal">Our Portfolio</div>
+                <h2 class="section-title reveal">Featured <span class="gold">Projects</span></h2>
+            </div>
+            <div class="filter-bar reveal">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="commercial">Commercial</button>
+                <button class="filter-btn" data-filter="residential">Residential</button>
+                <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+            </div>
+        </div>
+        <div class="projects-grid" id="projectsGrid">
+            <div class="project-card reveal" data-category="commercial">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Tower">
+                <div class="project-overlay"><div class="project-tag">Commercial</div><h3>Skyline Business Tower</h3><p>Modern 25-floor commercial complex.</p></div>
+            </div>
+            <div class="project-card reveal" data-category="residential">
+                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Residential">
+                <div class="project-overlay"><div class="project-tag">Residential</div><h3>Palm Residency</h3><p>Luxury 200+ apartment community.</p></div>
+            </div>
+            <div class="project-card reveal" data-category="infrastructure">
+                <img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=600&q=80" alt="Highway">
+                <div class="project-overlay"><div class="project-tag">Infrastructure</div><h3>National Highway Expansion</h3><p>120km highway connecting corridors.</p></div>
+            </div>
+            <div class="project-card reveal" data-category="commercial">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="IT Park">
+                <div class="project-overlay"><div class="project-tag">Commercial</div><h3>TechPark Innovation Hub</h3><p>Cutting-edge IT park with smart tech.</p></div>
+            </div>
+            <div class="project-card reveal" data-category="residential">
+                <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&q=80" alt="Villa">
+                <div class="project-overlay"><div class="project-tag">Residential</div><h3>Emerald Villa Estates</h3><p>Premium smart home villas.</p></div>
+            </div>
+            <div class="project-card reveal" data-category="infrastructure">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Bridge">
+                <div class="project-overlay"><div class="project-tag">Infrastructure</div><h3>River Bridge Construction</h3><p>800m engineering marvel bridge.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <section class="gallery-section" id="gallery">
+        <div class="gallery-header">
+            <div class="section-label reveal" style="justify-content:center">Photo Gallery</div>
+            <h2 class="section-title reveal">Our <span class="gold">Projects</span> in Pictures</h2>
+            <p class="section-desc reveal">Explore our portfolio through stunning visuals from completed and ongoing projects.</p>
+        </div>
+        <div class="gallery-filters reveal">
+            <button class="gallery-filter active" data-gfilter="all">All</button>
+            <button class="gallery-filter" data-gfilter="commercial">Commercial</button>
+            <button class="gallery-filter" data-gfilter="residential">Residential</button>
+            <button class="gallery-filter" data-gfilter="infrastructure">Infrastructure</button>
+            <button class="gallery-filter" data-gfilter="interior">Interior</button>
+            <button class="gallery-filter" data-gfilter="ongoing">Ongoing</button>
+        </div>
+        <div class="gallery-masonry" id="galleryGrid">
+            <div class="gallery-item reveal" data-gcategory="commercial">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Skyline Tower">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Commercial</div>
+                    <h4>Skyline Business Tower</h4>
+                    <p>25-floor modern commercial complex in the city center.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="residential">
+                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Palm Residency">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Residential</div>
+                    <h4>Palm Residency</h4>
+                    <p>Luxury 200+ apartment community with modern amenities.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="infrastructure">
+                <img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=600&q=80" alt="Highway">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Infrastructure</div>
+                    <h4>National Highway Expansion</h4>
+                    <p>120km highway connecting major corridors.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="commercial">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="IT Park">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Commercial</div>
+                    <h4>TechPark Innovation Hub</h4>
+                    <p>Cutting-edge IT park with smart technology integration.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="residential">
+                <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&q=80" alt="Villa">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Residential</div>
+                    <h4>Emerald Villa Estates</h4>
+                    <p>Premium smart home villas with landscaped gardens.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="infrastructure">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Bridge">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Infrastructure</div>
+                    <h4>River Bridge Construction</h4>
+                    <p>800m engineering marvel bridge project.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="interior">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80" alt="Interior">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Interior</div>
+                    <h4>Luxury Office Interiors</h4>
+                    <p>Modern workspace design with premium finishes.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="ongoing">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Ongoing">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Ongoing</div>
+                    <h4>Metro Rail Corridor</h4>
+                    <p>15km elevated metro rail construction project.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="commercial">
+                <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=600&q=80" alt="Mall">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Commercial</div>
+                    <h4>Grand Mall Complex</h4>
+                    <p>2 million sq.ft retail and entertainment destination.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="residential">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Villas">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Residential</div>
+                    <h4>Serenity Villa Homes</h4>
+                    <p>Exclusive gated community with 50 premium villas.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="ongoing">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80" alt="Hospital">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Ongoing</div>
+                    <h4>Multi-Specialty Hospital</h4>
+                    <p>500-bed state-of-the-art healthcare facility.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="interior">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80" alt="Lobby">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Interior</div>
+                    <h4>Hotel Lobby Design</h4>
+                    <p>Elegant 5-star hotel lobby with custom furnishings.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="infrastructure">
+                <img src="https://images.unsplash.com/photo-1587578855663-4be8717f6c44?w=600&q=80" alt="Dam">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Infrastructure</div>
+                    <h4>Water Resource Project</h4>
+                    <p>Multi-purpose dam and irrigation system.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="commercial">
+                <img src="https://images.unsplash.com/photo-1464938050520-ef2571e0d6e0?w=600&q=80" alt="Hotel">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Commercial</div>
+                    <h4>Grand Horizon Hotel</h4>
+                    <p>200-room luxury hotel with conference facilities.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="residential">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Apartment">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Residential</div>
+                    <h4>Urban Heights Apartments</h4>
+                    <p>High-rise residential towers with panoramic views.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="ongoing">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80" alt="Factory">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Ongoing</div>
+                    <h4>Industrial Manufacturing Unit</h4>
+                    <p>500,000 sq.ft advanced manufacturing facility.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal" data-gcategory="interior">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Living Room">
+                <div class="gallery-overlay">
+                    <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+                    <div class="project-tag">Interior</div>
+                    <h4>Premium Penthouse Interior</h4>
+                    <p>Bespoke interior design for ultra-luxury residence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImg">
+        </div>
+        <div class="lightbox-caption">
+            <h4 id="lightboxTitle"></h4>
+            <p id="lightboxDesc"></p>
+        </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="team-section" id="team">
+        <div class="team-header">
+            <div class="section-label reveal" style="justify-content:center">Our Team</div>
+            <h2 class="section-title reveal">Meet The <span class="gold">Leaders</span></h2>
+            <p class="section-desc reveal">Our experienced leadership drives excellence across every project.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card reveal reveal-delay-1">
+                <div class="team-avatar"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=80" alt="Director"></div>
+                <h4>Rajesh Sanjay</h4><div class="role">Managing Director</div>
+                <p>Visionary leader with 20+ years in construction.</p>
+                <div class="team-socials"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
+            </div>
+            <div class="team-card reveal reveal-delay-2">
+                <div class="team-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=80" alt="Director"></div>
+                <h4>Priya Agarwal</h4><div class="role">Chief Operations Officer</div>
+                <p>Expert in project management and operations.</p>
+                <div class="team-socials"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
+            </div>
+            <div class="team-card reveal reveal-delay-3">
+                <div class="team-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" alt="Director"></div>
+                <h4>Vikram Mehta</h4><div class="role">Head of Engineering</div>
+                <p>Structural engineering expert in innovative design.</p>
+                <div class="team-socials"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
+            </div>
+            <div class="team-card reveal reveal-delay-4">
+                <div class="team-avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80" alt="Director"></div>
+                <h4>Ananya Sharma</h4><div class="role">Design Director</div>
+                <p>Award-winning architect bringing creative vision.</p>
+                <div class="team-socials"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHY US -->
+    <div class="why-section" id="why">
+        <div class="why-content">
+            <div class="section-label reveal">Why Choose Us</div>
+            <h2 class="section-title reveal">What Makes Us <span class="gold">Different</span></h2>
+            <p class="section-desc reveal">We build trust, relationships, and a legacy of excellence.</p>
+            <div class="why-list">
+                <div class="why-item reveal reveal-delay-1"><div class="why-item-icon"><i class="fas fa-shield-alt"></i></div><div><h4>Uncompromising Quality</h4><p>Premium materials and strict quality protocols.</p></div></div>
+                <div class="why-item reveal reveal-delay-2"><div class="why-item-icon"><i class="fas fa-clock"></i></div><div><h4>On-Time Delivery</h4><p>Efficient project management on schedule.</p></div></div>
+                <div class="why-item reveal reveal-delay-3"><div class="why-item-icon"><i class="fas fa-hand-holding-usd"></i></div><div><h4>Transparent Pricing</h4><p>No hidden costs, complete transparency.</p></div></div>
+                <div class="why-item reveal reveal-delay-4"><div class="why-item-icon"><i class="fas fa-headset"></i></div><div><h4>24/7 Customer Support</h4><p>Dedicated support round the clock.</p></div></div>
+            </div>
+        </div>
+        <div class="why-image reveal">
+            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="Construction Excellence">
+            <div class="why-badge"><i class="fas fa-trophy"></i><div class="why-badge-text">Award Winning<br>Construction Firm</div></div>
+        </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <section class="clients-section">
+        <div class="clients-header">
+            <div class="section-label reveal" style="justify-content:center">Trusted Partners</div>
+            <h2 class="section-title reveal">Our <span class="gold">Clients</span></h2>
+        </div>
+        <div class="clients-track-wrapper">
+            <div class="clients-track" id="clientsTrack">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/120px-Amazon_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/120px-Microsoft_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/120px-Google_2015_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/120px-IBM_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Tata_Consultancy_Services_Logo.svg/120px-Tata_Consultancy_Services_Logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Infosys_logo.svg/120px-Infosys_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Wipro_logo.svg/120px-Wipro_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.png/120px-Logo_TV_2015.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/120px-Amazon_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/120px-Microsoft_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/120px-Google_2015_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/120px-IBM_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Tata_Consultancy_Services_Logo.svg/120px-Tata_Consultancy_Services_Logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Infosys_logo.svg/120px-Infosys_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Wipro_logo.svg/120px-Wipro_logo.svg.png" class="client-logo" alt="Client">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.png/120px-Logo_TV_2015.png" class="client-logo" alt="Client">
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="section-label reveal" style="justify-content:center">Testimonials</div>
+        <h2 class="section-title reveal">What Our Clients <span class="gold">Say</span></h2>
+        <p class="section-desc reveal">Hear from the clients who trust us with their most important projects.</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal reveal-delay-1">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"SANJO delivered our commercial complex ahead of schedule with exceptional quality."</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">RK</div><div><div class="testimonial-name">Rajesh Kumar</div><div class="testimonial-role">CEO, Kumar Builders</div></div></div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-2">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"They transformed our vision into a stunning residential project. Highly recommended!"</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">PM</div><div><div class="testimonial-name">Priya Mehta</div><div class="testimonial-role">Director, Mehta Constructions</div></div></div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-3">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"Working with SANJO was a seamless experience. Their expertise is unmatched."</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">AS</div><div><div class="testimonial-name">Amit Sharma</div><div class="testimonial-role">MD, Infra Solutions Ltd.</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section reveal">
+        <div class="cta-content">
+            <h2>Ready to Build Your Dream Project?</h2>
+            <p>Get in touch today. Free consultation and quote available.</p>
+        </div>
+        <a href="#contact" class="cta-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+        <div class="contact-info">
+            <div class="section-label reveal">Contact Us</div>
+            <h2 class="section-title reveal">Let's Start Your <span class="gold">Project</span></h2>
+            <p class="section-desc reveal">Have a project in mind? We'd love to hear about it.</p>
+            <div class="contact-details">
+                <div class="contact-item reveal"><div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-item-text"><span>Office Address</span><p>Head Office, India</p></div></div>
+                <div class="contact-item reveal"><div class="contact-item-icon"><i class="fas fa-phone-alt"></i></div><div class="contact-item-text"><span>Phone Number</span><p>+91 XXXXX XXXXX</p></div></div>
+                <div class="contact-item reveal"><div class="contact-item-icon"><i class="fas fa-envelope"></i></div><div class="contact-item-text"><span>Email Address</span><p>info@sanjoprojects.com</p></div></div>
+                <div class="contact-item reveal"><div class="contact-item-icon"><i class="fas fa-clock"></i></div><div class="contact-item-text"><span>Working Hours</span><p>Mon - Sat: 9:00 AM - 6:00 PM</p></div></div>
+            </div>
+        </div>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group"><input type="text" placeholder="Your Name" required><input type="email" placeholder="Email Address" required></div>
+            <input type="text" placeholder="Subject">
+            <textarea placeholder="Tell us about your project..." required></textarea>
+            <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="nav-brand" style="margin-bottom:16px">
+                    <img src="logo.jpg" alt="SANJO Logo" class="nav-logo" style="width:80px;height:80px">
+                    <div class="nav-brand-text">SANJO<span>Projects & Infrastructures</span></div>
+                </a>
+                <p>Building the future with innovation, quality, and integrity.</p>
+                <div class="brand-full">SANJO Projects and Infrastructures Private Limited</div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul><li><a href="#about">About Us</a></li><li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li><li><a href="#team">Team</a></li><li><a href="#contact">Contact</a></li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul><li><a href="#services">Commercial</a></li><li><a href="#services">Residential</a></li><li><a href="#services">Infrastructure</a></li><li><a href="#services">Interior Design</a></li><li><a href="#services">Project Management</a></li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p style="color:var(--text3);font-size:12px;line-height:1.7;margin-bottom:16px">Subscribe for updates and insights.</p>
+                <form style="display:flex;gap:8px" onsubmit="event.preventDefault()">
+                    <input type="email" placeholder="Your email" style="flex:1;padding:12px 14px;background:var(--cream);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:12px;outline:none">
+                    <button type="submit" style="padding:12px 16px;background:var(--gold);border:none;border-radius:8px;color:var(--green);cursor:pointer;font-size:0.9rem"><i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SANJO Projects and Infrastructures Private Limited. All Rights Reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color:var(--gold)"></i> for Construction Excellence</p>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-comments"></i>
+        <span class="badge">1</span>
+    </button>
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <img src="logo.jpg" alt="SANJO">
+            <div class="chatbot-header-text"><h4>SANJO Assistant</h4><span>We reply instantly</span></div>
+            <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="chat-msg bot">Hello! Welcome to SANJO Projects & Infrastructures. How can we help you today?</div>
+        </div>
+        <div class="chatbot-quick" id="chatQuick">
+            <button onclick="sendQuick('I need a quote')">Get Quote</button>
+            <button onclick="sendQuick('What services do you offer?')">Services</button>
+            <button onclick="sendQuick('Tell me about your projects')">Projects</button>
+            <button onclick="sendQuick('Where is your office?')">Location</button>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter')sendMessage()">
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // PRELOADER
+        window.addEventListener('load', () => setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 2200));
+
+        // THEME TOGGLE
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            const isLight = html.getAttribute('data-theme') === 'light';
+            html.setAttribute('data-theme', isLight ? 'dark' : 'light');
+            themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+        });
+
+        // NAVBAR
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+
+        // HAMBURGER
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); mobileMenu.classList.toggle('active'); });
+        function closeMobile() { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); }
+
+        // SCROLL REVEAL
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // COUNT UP
+        const countObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const el = e.target, target = parseInt(el.getAttribute('data-target'));
+                    let current = 0; const inc = target / 50;
+                    const timer = setInterval(() => {
+                        current += inc;
+                        if (current >= target) { el.textContent = target; clearInterval(timer); }
+                        else el.textContent = Math.floor(current);
+                    }, 28);
+                    countObs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.count-up').forEach(el => countObs.observe(el));
+
+        // PROJECT FILTER
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                document.querySelectorAll('.project-card').forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.classList.remove('hidden-card');
+                        card.style.animation = 'fadeIn 0.4s ease forwards';
+                    } else { card.classList.add('hidden-card'); }
+                });
+            });
+        });
+
+        // SMOOTH SCROLL
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const t = document.querySelector(this.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // FORM SUBMIT
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+            btn.style.background = '#22c55e';
+            setTimeout(() => { btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>'; btn.style.background = ''; e.target.reset(); }, 2500);
+        }
+
+        // CHATBOT
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        chatbotToggle.addEventListener('click', () => { chatbotWindow.classList.toggle('active'); chatbotToggle.querySelector('.badge').style.display = 'none'; });
+        chatbotClose.addEventListener('click', () => chatbotWindow.classList.remove('active'));
+        const botReplies = {
+            quote: "We'd be happy to provide a free quote! Please share your project details or call us at +91 XXXXX XXXXX.",
+            services: "We offer: Commercial Construction, Residential Projects, Infrastructure Development, Interior Design, Project Management, and Industrial Construction.",
+            projects: "We've completed 250+ projects including Skyline Business Tower, Palm Residency, National Highway Expansion, and many more.",
+            location: "Our head office is in India, serving 12+ states. Reach us at info@sanjoprojects.com or +91 XXXXX XXXXX.",
+            default: "Thank you! Our team will get back to you shortly. For immediate assistance, call +91 XXXXX XXXXX."
+        };
+        function addMessage(text, isUser) {
+            const msg = document.createElement('div');
+            msg.className = 'chat-msg ' + (isUser ? 'user' : 'bot');
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        function getReply(text) {
+            const l = text.toLowerCase();
+            if (l.includes('quote') || l.includes('price') || l.includes('cost')) return botReplies.quote;
+            if (l.includes('service') || l.includes('what do')) return botReplies.services;
+            if (l.includes('project') || l.includes('portfolio') || l.includes('work')) return botReplies.projects;
+            if (l.includes('location') || l.includes('office') || l.includes('address') || l.includes('where')) return botReplies.location;
+            return botReplies.default;
+        }
+        function sendMessage() { const t = chatInput.value.trim(); if (!t) return; addMessage(t, true); chatInput.value = ''; setTimeout(() => addMessage(getReply(t), false), 500); }
+        function sendQuick(t) { addMessage(t, true); setTimeout(() => addMessage(getReply(t), false), 500); }
+
+        // FADE IN ANIMATION
+        const style = document.createElement('style');
+        style.textContent = '@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }';
+        document.head.appendChild(style);
+
+        // GALLERY FILTERS
+        document.querySelectorAll('.gallery-filter').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.gallery-filter').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-gfilter');
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-gcategory') === filter) {
+                        item.classList.remove('hidden');
+                        item.style.animation = 'fadeIn 0.4s ease forwards';
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // LIGHTBOX
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDesc = document.getElementById('lightboxDesc');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+        let currentGalleryItems = [];
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentGalleryItems = Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            const item = currentGalleryItems[currentIndex];
+            const img = item.querySelector('img');
+            const overlay = item.querySelector('.gallery-overlay');
+            lightboxImg.src = img.src.replace('w=600', 'w=1400');
+            lightboxImg.alt = img.alt;
+            lightboxTitle.textContent = overlay.querySelector('h4').textContent;
+            lightboxDesc.textContent = overlay.querySelector('p').textContent;
+            lightboxCounter.textContent = (currentIndex + 1) + ' / ' + currentGalleryItems.length;
+        }
+
+        function navigateLightbox(dir) {
+            currentIndex = (currentIndex + dir + currentGalleryItems.length) % currentGalleryItems.length;
+            updateLightbox();
+        }
+
+        document.querySelectorAll('.gallery-item').forEach((item, i) => {
+            item.addEventListener('click', () => {
+                const visibleItems = Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+                const visibleIndex = visibleItems.indexOf(item);
+                openLightbox(visibleIndex);
+            });
+        });
+
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxPrev').addEventListener('click', () => navigateLightbox(-1));
+        document.getElementById('lightboxNext').addEventListener('click', () => navigateLightbox(1));
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+    </script>
+</body>
+</html>
